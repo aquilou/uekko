@@ -29,7 +29,7 @@ function Activar () {
     `FormulariosId` INT NOT NULL AUTO_INCREMENT,
     `Nombre` VARCHAR(45) NULL,
     `ShortCode` VARCHAR(45) NULL,
-    PRIMARY KEY (`FormulariosId`),
+    PRIMARY KEY (`FormulariosId`)
     )ENGINE=InnoDB $charset_collate;";
     $wpdb->query($sql);
 
@@ -43,12 +43,12 @@ function Activar () {
         `Pregunta` VARCHAR(150) NULL,
         `Tipo` VARCHAR(45) NULL,
         PRIMARY KEY (`DetalleId`),
-        CONSTRAINT fk_formularios,
+        CONSTRAINT fk_formularios
             FOREIGN KEY (`FormulariosId`)
-            REFERENCES {$wpdb->prefix}formularios(`FormulariosId`),
-            ON DELETE CASCADE,
-            ON UPDATE CASCADE,
-        )ENGINE=InnoDB $charset_collate;";
+            REFERENCES {$wpdb->prefix}formularios(`FormulariosId`)
+            ON DELETE CASCADE
+            ON UPDATE CASCADE
+    ) ENGINE=InnoDB $charset_collate;";
     $wpdb->query($sql2);
 
     if (HAZTE_UEKKO_DEBUG && $wpdb->last_error) {
@@ -59,13 +59,13 @@ function Activar () {
         `RespuestaId` INT NOT NULL AUTO_INCREMENT,
         `DetalleId` INT NOT NULL,
         `Respuesta` VARCHAR(45) NULL,
-        PRIMARY KEY (`RespuestaId`)
-        CONSTRAINT fk_detalle_formularios,
-            FOREIGN KEY (`DetalleId`),
-            REFERENCES {$wpdb->prefix}detalle_formularios(`DetalleId`),
-            ON DELETE CASCADE,
-            ON UPDATE CASCADE,
-        )ENGINE=InnoDB $charset_collate;";
+        PRIMARY KEY (`RespuestaId`),
+        CONSTRAINT fk_detalle_formularios
+            FOREIGN KEY (`DetalleId`)
+            REFERENCES {$wpdb->prefix}detalle_formularios(`DetalleId`)
+            ON DELETE CASCADE
+            ON UPDATE CASCADE
+    ) ENGINE=InnoDB $charset_collate;";
     $wpdb->query($sql3);
 
     if (HAZTE_UEKKO_DEBUG && $wpdb->last_error) {
